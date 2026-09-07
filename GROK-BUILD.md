@@ -1,8 +1,10 @@
-# Grok Build prompt — Barn Central (photo polish + competitor-grade gallery)
+# Grok Build prompt — Barn Central (home redundancy, colors, framing, real quote/contact)
 
-Paste everything below the line into a **new** Grok Build session. Point it at this repo. If an old CLI watcher is looping on port 8080, **stop that process first**, then paste this.
+Paste everything below the line into a **new** Grok Build session pointed at:
 
-**Repo:** https://github.com/SpiderForce-Star/Barn-Central
+**https://github.com/SpiderForce-Star/Barn-Central**
+
+If an old CLI watcher is looping, **stop that process first**, then paste.
 
 ---
 
@@ -11,9 +13,9 @@ Upgrade this live contractor website FROM the GitHub repository. Do not start fr
 
 https://github.com/SpiderForce-Star/Barn-Central
 
-Keep the existing TanStack Start / React app, routes, quote tool, logo, and every file already in public/. This is a polish + gallery architecture pass — not a redesign from zero.
+Keep TanStack Start / React, the circular logo (public/logo.png), every real job photo in public/buildings/, the 2D elevation quote preview, brand tokens, and Grok PWA / PreviewHostBridge / og injector.
 
-Kill any stuck old preview watcher, then run this app on the preview port and leave it running.
+Kill any stuck old preview watcher. Run the app on the preview port and leave it running.
 
 ========================================
 WHO THIS IS FOR
@@ -21,230 +23,205 @@ WHO THIS IS FOR
 
 Client: Barn Central
 Tagline (exact): Your go-to barn and barndominium builder of Middle Tennessee.
-Pitch (exact, use on home/about/services/quote/footer): We design to your needs and wants. We supply and construct on your site.
+Pitch (exact): We design to your needs and wants. We supply and construct on your site.
 Phone: (615) 693-9925   tel:+16156939925
-Email: sales@thebarncentral.com
-Facebook (must stay linked): https://www.facebook.com/profile.php?id=61587244332260
-Region: Middle Tennessee.
+Email: sales@thebarncentral.com   mailto:sales@thebarncentral.com
+Facebook: https://www.facebook.com/profile.php?id=61587244332260
+Three structures ONLY: Barns / Storage · Garage / Shops · Barndos / Homes.
 
-Three structures ONLY:
-1. Barns / Storage
-2. Garage / Shops
-3. Barndos / Homes
-
-Quote chips, services, and gallery filters must match these three. Do not add venues, warehouses, equine, or commercial as their own buckets.
-
-========================================
 HARD RULES
-========================================
-
-1. ONLY Barn Central’s real photos and the circular wood-grain logo. No stock. No AI buildings. No Unsplash. No generated skies pasted onto a different building.
-2. Logo is public/logo.png. Do not redraw it.
-3. Honest copy only. Do not invent years in business, licenses, warranties, prices per sq ft, awards, or testimonials. Do not invent locations except where the Facebook post already named them (Bethpage, Gallatin, Smyrna, Portland / Big Sky Farm, Westmoreland, Nashville).
-4. Do not dump the quote page. Keep the 2D gable-end elevation + size sliders + mailto. Do not try to build a Morton/Lester 3D configurator.
-5. Auth OFF. Database OFF. No fake login.
-6. Do not strip Grok PWA pill, PreviewHostBridge, or og injector.
+- Real photos and the real circular logo only. No stock. No AI buildings. No Unsplash.
+- Honest copy. No invented years, warranties, prices, awards, or testimonials.
+- Auth OFF. Database OFF. Forms submit with mailto:sales@thebarncentral.com and also save a copy in localStorage. That is the “actual contact” — it opens the customer’s mail app addressed to sales@thebarncentral.com.
+- Do not strip Grok PWA pill / PreviewHostBridge / og injector.
 
 ========================================
-WHAT THE NATIONAL BUILDERS DO — COPY THE PATTERN, NOT THE SCALE
+1. STOP THE BETHPAGE REPEAT ON HOME
 ========================================
 
-Reviewed: Morton Buildings, Wick Buildings, Lester Buildings, Cleary, plus Middle Tennessee shops (Midsouth Barndominiums, Affordable Building Concepts, National Barn / Portland, Oak & Iron, Cameron Leduc).
+The live site (barn-central.vercel.app) uses the SAME Bethpage 50×60×16 building three times: hero, Featured, and Recent work. That is too much.
 
-STEAL these patterns (they fit a small TN contractor):
-
-A. One JOB is one gallery tile. Extra angles live inside the lightbox as thumbs, not as duplicate tiles. Morton does this (“Andy’s Farm Shop, Freeland MI — 72×105×16, porch, wainscot, cupola”). We do not have owner names — use the town + size.
-
-B. Spec line on every job, Morton style:
-   50′ W × 60′ L × 16′ H  ·  two 12×60 porches  ·  Bethpage, TN
-   Feature chips under it: Dual porches · Open bay · Charcoal roof
-   Never “beautiful custom structure.”
-
-C. Photography rules from those galleries:
-   - Building fills 55–75% of the frame.
-   - Horizon level. Sky is the upper third, not a sliver.
-   - Ridge sits in the upper third. Gable is not cropped off.
-   - One scale object is good if it is already in the photo (truck, tractor). Do not add fake ones.
-   - Construction debris, lumber piles, and people at the edge get cropped out when the building still reads. Do not clone-stamp. Do not generate a finished lawn.
-   - Metal photographs dark — lift midtones on walls so color (barn red, tan, white) actually reads.
-   - Tennessee daylight grade: slight warmth, +contrast, no HDR halo, no fake sunset sky.
-
-D. Featured job gets a dedicated block: one large photo + 3–4 detail thumbs of the SAME building + spec + “Get a quote like this.” Bethpage 50×60×16 is that job.
-
-E. Services are three full-bleed photo sections, not icon cards. One real photo each. Four short bullets. CTA “Quote this type.”
-
-F. Process stays five steps (already in src/lib/site.ts). Pair step 04 “Raise it on your site” with a real timber-porch photo (r1b-wrap-porch or a Bethpage porch), not a generic icon.
-
-G. Phone is always visible. Quote CTA on every page. Sticky mobile Call + Quote bar stays.
-
-DO NOT steal (overkill or dishonest for this client):
-- Morton 3D Studio / MyLester Design / Wick plan PDF mill.
-- Fake 70-year heritage, national dealer maps, warranty badges.
-- Published $/sq ft (Midsouth/Cameron do this; Barn Central has not given a number).
-- Stock interiors, fake reviews, “as seen on” bars.
-- Equine / commercial / aviation categories.
-
-Barn Central’s edge vs those sites: local, real Facebook jobs, three clear building types, “we design it and we raise it on your site.” Keep that. Do not inflate into a national brand.
+Fix:
+- Bethpage stays in the /projects gallery only. It is not the home hero, not Featured, not in the home “Recent work” strip.
+- HOME HERO: use a DIFFERENT real photo — public/buildings/r1b-wrap-porch.jpg (white walls, wrap timber porch, cupola, truck). Full-bleed. Headline still the pitch: “We design to your needs and wants.” Sub: “We supply and construct on your site.” + tagline. CTAs: Get a quote + Call. Do not put this wrap-porch job in Featured or in the home Recent work strip either.
+- FEATURED (the labeled job block under the hero): the Facebook header / Feb 4 tan shop-and-living barndo.
+    Photo: public/buildings/barndo-tan-balcony.jpg
+    Recrop that file (or a 16:9 presentation of it) so the WHOLE building reads — three overheads on the shop end, covered balcony on the living wing, tan walls, red roof. The current tight 4:3 crop cuts the story. Do not generate a new building. Do not add sky. Crop/grade only.
+    Title: Shop and living, with balcony
+    Spec: Tan walls · red roof · three overheads · covered balcony · posted February 4, 2026
+    CTA: See the work → /projects (Barndos filter or this job’s lightbox)
+- RECENT WORK on home: 3 other covers, none of which are the hero or Featured or Bethpage. Use: Gallatin red shop, two-bay white barn, four-door shop (or open-gable). Link to full gallery.
+- /projects still lists ALL jobs, including Bethpage and the wrap-porch and the tan barndo.
 
 ========================================
-PHOTO GRADE SHEET — DO THIS FIRST
+2. FACEBOOK ICON IN HEADER AND FOOTER
 ========================================
 
-Work on the files in public/buildings/. Save over the same paths (or -v2 and update src/lib/projects.ts). Use PIL / ImageMagick only. No generative fill. No sky replacement. No adding people or trucks.
+Add a real Facebook “f” icon (inline SVG, official-looking glyph, not a random PNG) next to the phone in the header and in the footer Talk-to-us list.
 
-Global grade for screenshot-sourced files (barn-open-gable, shop-gallatin-red, barndo-tan-balcony):
-  autocontrast cutoff 0.6–1.0
-  Color 1.08–1.12 (warmth)
-  Contrast 1.06–1.10
-  Brightness 1.03–1.05
-  UnsharpMask radius 1.2 percent 80 threshold 3
-  Straighten if horizon is more than ~0.5° off.
-
-Then per file:
-
-hero-bethpage.jpg
-  BEST photo. Do not recrop the source file.
-  CSS: object-cover. Desktop object-position 50% 58%. Mobile (max-sm) 62% 48% so the gable stays above the dark overlay and is not under the H1.
-  Lighting is already correct (clear sky, sun from the left). Do not regrade.
-
-fb-wide.jpg / fb-open-bay.jpg / fb-porch-left.jpg / fb-porch-right.jpg
-  Same job as the hero. Do not show these as separate gallery tiles — they become lightbox slides of Bethpage.
-  Open-bay: lift interior shadows so the bay reads as a drive-through, not a black hole.
-  Porch details: crop to timber posts + eave; keep the wood grain.
-
-shop-gallatin-red.jpg
-  Lighting: good hard sun, keep the blue sky.
-  Position: crop ~8–10% off the RIGHT to drop the enclosed cargo trailer and the two people. Keep the full red gable, lean-to, and window.
-  Lift the red wall slightly so “black on red” pops.
-  object-position 42% 55%.
-
-barn-open-gable.jpg
-  Lighting: a little dim. Lift midtones. Keep the blue sky. Do not replace sky.
-  Position: crop ~10–14% off the LEFT so the dead branches cover less of the wall. Keep the open gable and rafters in the center. Do not clone out remaining twigs — crop only.
-  object-position 58% 50%.
-
-barndo-tan-balcony.jpg
-  Lighting: overcast / flat. Add contrast and a touch of warmth so tan walls and red roof separate from the gray sky. Do not add a fake blue sky.
-  Position: crop ~8–12% off the BOTTOM to reduce the lumber pile. Keep at least two overheads AND the balcony in frame — that is the barndo story (shop + living).
-  object-position 38% 46%.
-
-gray-four-door.jpg
-  Lighting: muddy / cool. Warmth + contrast so the four overheads read. Keep gravel.
-  Position: center the four doors. Horizon level.
-  object-position 50% 52%.
-
-r1b-wrap-porch.jpg
-  Strong photo. Keep. This is the wrap-porch COVER.
-  Position: object-position 48% 46% so the cupola and porch stay in the 4:3 window (do not let object-cover chop the cupola).
-  Lighting: already good; tiny warmth only if needed.
-
-r1c-two-bay.jpg
-  Strong photo. Keep.
-  Position: object-position 50% 48% so both open bays stay in frame. Do not crop off the lean-to on the right.
-  Lighting: good; leave it.
-
-r1d-wrap-alt.jpg / r2a-wrap.jpg / r2c-wrap3.jpg
-  Extra angles of the wrap-porch shop. Lightbox slides, not their own tiles.
+- href = site.facebook
+- target=_blank rel=noreferrer
+- aria-label="Barn Central on Facebook"
+- Visible on desktop header. In the mobile menu too.
+- Footer: icon + the word Facebook, not text-only.
 
 ========================================
-GALLERY DATA MODEL
+3. CONTACT US → CUSTOMER EMAIL
 ========================================
 
-Change Project so one job can have extra slides:
+Add /contact (also a header/footer path).
 
-type Project = {
-  id: string;
-  title: string;
-  location?: string;
-  spec?: string;          // e.g. "50′ × 60′ × 16′ · two 12×60 porches"
-  features?: string[];    // short chips: "Dual porches", "Open bay"
-  category: "barn" | "shop" | "barndo";
-  image: string;          // cover
-  images?: string[];      // extra angles, same job
-  featured?: boolean;
-  notes: string;
-};
+This is not a fake CRM. The page is a short form that builds a mailto:sales@thebarncentral.com message:
 
-Jobs to ship (covers only in the grid — extras in the lightbox):
+Fields: Name*, Phone*, Email, Town / county, Message*
+Submit: required name + phone; then window.location.href = mailto with subject “Contact · {name}” and the fields in the body. Save JSON to localStorage key barn-central-contact.
+Success copy: “Your mail app should open to sales@thebarncentral.com. If it does not, email us at that address or call (615) 693-9925.”
 
-1. bethpage-50x60   shop  FEATURED
-   cover: hero-bethpage.jpg
-   slides: fb-wide, fb-open-bay, fb-porch-left, fb-porch-right
-   spec: 50′ × 60′ × 16′ · two 12×60 porches · Bethpage, TN
-   features: Dual porches · Open bay · Charcoal roof
-2. wrap-porch       shop
-   cover: r1b-wrap-porch.jpg
-   slides: r1d-wrap-alt, r2a-wrap, r2c-wrap3
-   features: Wrap porch · Overheads · Cupola
-3. gallatin-red     shop
-   cover: shop-gallatin-red.jpg
-   spec: Gallatin, TN · posted March 3, 2026
-   features: Barn red · Lean-to · Black roof
-4. gray-four-door   shop
-   cover: gray-four-door.jpg
-   features: Four overheads · Walk door
-5. tan-balcony      barndo
-   cover: barndo-tan-balcony.jpg
-   spec: posted February 4, 2026
-   features: Three overheads · Living wing · Balcony
-6. two-bay          barn
-   cover: r1c-two-bay.jpg
-   features: Open bays · Lean-to
-7. open-gable       barn
-   cover: barn-open-gable.jpg
-   spec: posted February 26, 2026
-   features: Open gable · Exposed rafters
+Header/footer email is always a live mailto:sales@thebarncentral.com link (Mail icon + the address). Phone stays tel:+16156939925.
 
-Lightbox: large photo, thumbs for extra angles, spec, feature chips, notes, “See more on Facebook.” Keyboard left/right if easy.
-
-Home “recent work” uses the same grouped jobs (limit 3–4 covers), not every file.
-
-If you recover additional Facebook photos (Nashville 3-bay, shop interior, Westmoreland 24×24, Big Sky Farm TN, red stone-post barndo, charcoal barndo, black snow barndo, Gallatin wood-siding barn, 60×120 feed barn, Smyrna 30×40), add them as new jobs in the right category. If you cannot reach Facebook, ship with the repo files. Do not invent substitutes.
+Nav (desktop): Work · Services · Colors · Framing · About
+Primary button: Get a quote → /quote
+Secondary: Facebook icon, phone, and Contact (/contact) in the utility cluster / mobile menu.
+Do not cram eight text links into the bar. Contact can live next to the mail icon.
 
 ========================================
-PAGES
+4. REAL QUOTE FORM — FULL CUSTOMER + SITE + DESCRIPTION
 ========================================
 
-/         Home
-          - Full-bleed Bethpage hero with the object-position values above.
-          - H1 = pitch line 1. Sub = pitch line 2 + the three types + tagline.
-          - CTAs: Get a quote + tap-to-call.
-          - Where / What / How strip (already there).
-          - Featured Bethpage block with 3–4 detail thumbs of the SAME job.
-          - Three service cards using the graded photos (barns = two-bay or open-gable, shops = gallatin-red, barndos = tan-balcony).
-          - Recent work: grouped covers, not duplicate angles.
-          - Process (5 steps). Step 04 uses a real porch photo.
-          - Close with quote CTA.
+Rewrite /quote so it is a request-a-quote page a contractor would actually send, not just sliders.
 
-/projects Work gallery — 3 filters, grouped jobs, lightbox with slides, empty-state still points at Facebook.
+Keep the 2D gable-end elevation preview. Add framing + foundation so the drawing can switch (see §6). Do not build a 3D configurator.
 
-/services Three sections: Barns / Storage, Garage / Shops, Barndos / Homes. Real photo, 4 bullets, Quote this type. Lead each section with the pitch.
+FORM, in this order (name/phone still above the fold on desktop; on mobile the form starts with contact, preview stacks under it):
 
-/about    Pitch first. Towns/counties. Process. Real porch/job photo. No fake bio years.
+A. You
+   - Full name *
+   - Phone *
+   - Email
+B. Ship-to / build location *
+   - Street / 911 address
+   - City
+   - County (existing county select)
+   - ZIP
+   - “This is where we supply and construct.”
+C. What you’re looking for *
+   - Large textarea. Placeholder: “Barn, shop, or barndo. Size if you know it. Doors, porch, living vs storage, pad, timeline.”
+D. Building spec (optional but shown — they can skip numbers and just write the box)
+   - Type chips: Barn / Storage · Garage / Shop · Barndo / Home
+   - Width, length, eave height (slider + number, synced)
+   - Framing chips: Gabled · Gabled unsymmetrical · Single slope · Lean-to (lean-to is a lean-to OFF a gabled main building)
+   - Foundation chips: Sunken post on dirt · Sunken post on gravel · Solid concrete floor · Split — gravel storage + concrete in living/shop
+   - Color (from the Colors page palette, §5)
+   - Porch: none / one / two + depth
+E. Timeline (optional)
 
-/quote    KEEP. Name + phone above the fold. 3 type chips. Sliders + number inputs synced. 2D gable-end elevation (not isometric). mailto:sales@thebarncentral.com + localStorage. Contact card next to the form, not below a dead zone.
+Submit: mailto:sales@thebarncentral.com with a clean body:
 
-Header: circular logo + wordmark, Work / Services / About / Quote, phone.
-Footer: logo, pitch, phone, email, Facebook.
-Mobile sticky: Call + Get a quote.
+  Quote request from {name}
+  Phone / email
+  Build location: {street}, {city}, {county} County, TN {zip}
+  Looking for:
+  {description}
+  Type / size / framing / foundation / color / porch / timeline
+
+Also localStorage barn-central-quote.
+Validate: name, phone, build city (or county), and the description box. Size numbers are optional if they filled the description.
 
 ========================================
-DESIGN
+5. NEW PAGE /colors — PANEL AND TRIM
 ========================================
 
-Keep tokens: Ink #1A120C, Barn #5C3317, Wood #8B5A2B, Cream #F4EDE3, Paper #FBF7F1.
-Fraunces display + Outfit body. No Inter, no Playfair-on-purple, no gold foil, no emoji UI.
-Photography-first. Tight type. Generous crops. 4:3 tiles with per-image object-position (see grade sheet).
-Share card: keep public/og.jpg and public/logo.png unless you recrop og from the real Bethpage + real logo.
+Separate page. Not a popup. Nav label: Colors.
+
+Use this palette ONLY (from the chart they supplied). REMOVE Navy, Copper, and Silver. Rename Vintage Metallic → Galvanized / Galvalume. Show the same metallic swatch, new name.
+
+id            label                      hex (wall)   notes
+red           Red                        #8E3B2C
+bright-red    Bright Red                 #C62828
+marine        Marine                     #1B4F72
+tan           Tan                        #C8B07A
+brown         Brown                      #555C3A
+charcoal      Charcoal                   #5D6168
+white         White                      #F2F1ED
+ivory         Ivory                      #EFE6C6
+beige         Beige                      #A9A394
+black         Black                      #1A1A1A
+burgundy      Burgundy                   #4A2230
+evergreen     Evergreen                  #1E5A36
+galvalume     Galvanized / Galvalume     #C5C5C5   metallic; CSS speckle/hatch ok. Do not label it Vintage Metallic.
+
+Page layout:
+- Title: Panels and trim
+- One sentence: “Walls, roof, and trim from this chart. We’ll lock color on your spec.”
+- Grid of large square swatches, label under each. Galvalume gets a light metallic texture, not a flat gray pretending to sparkle with a stock photo.
+- Short note: roof and wall can be different colors from this same list (Bethpage = white walls / charcoal roof; Gallatin = red walls / black roof; tan barndo = tan walls / red roof).
+- CTA: Quote this color → /quote (preselect if easy).
+
+Replace src/lib/site.ts wallColors with this list (include a roof default per color — charcoal or black roof is fine). Quote preview and /colors must share the same array.
+
+========================================
+6. NEW PAGE /framing — FRAMING + FOUNDATIONS
+========================================
+
+Nav label: Framing.
+
+FRAMING (2D elevation SVGs in the same language as building-preview.tsx — gable-end / side elevation, not isometric toys, not AI barns):
+
+1. Gabled
+   Equal roof slopes, peak on center. Standard barn/shop.
+2. Gabled unsymmetrical
+   Peak offset. One long slope, one short. Saltbox / unequal gable.
+3. Single sloped
+   One roof plane, high wall to low wall. Monoslope.
+4. Lean-to
+   MUST show a lean-to OFF a gabled main building (lower eave roof on one side, posts, like their real porches/lean-tos). Do not draw a lonely shed as if it were the whole job.
+
+Each card: SVG + name + 2-line use note (e.g. lean-to: “Porch, extra stall, or covered equipment off the eave.”).
+
+FOUNDATION (same page, below framing):
+
+Lead copy (use this meaning, you may tighten the words):
+Sunken-post foundation, laid out from the framing. The pad can be level/graded dirt or gravel. Solid-floor (concrete) is available. You can gravel a storage bay and pour a full concrete floor in the living or shop area of the same building.
+
+Diagrams (simple SVG cross-sections, labeled):
+- Sunken post in graded dirt
+- Sunken post on a gravel pad
+- Solid concrete floor
+- Split floor: gravel in the storage bays, concrete in the shop/living
+
+CTA: Quote framing and pad → /quote
+
+Wire the quote form’s framing + foundation chips to these same ids.
+
+========================================
+7. KEEP / UPDATE
+========================================
+
+/         Home as specified in §1. Where/What/How strip stays. Three service cards stay (barns, shops, barndos) using real photos that are not all Bethpage. Process stays 5 steps. Close with quote CTA.
+
+/projects Grouped jobs (one tile per building, extra angles in the lightbox). Filters: Barns / Storage · Garage / Shops · Barndos / Homes. Bethpage lives here. Facebook link for more.
+
+/services Three sections only. Real photos. Quote this type.
+
+/about    Pitch first. Towns/counties. Process. Real job photo (not the home hero repeat if you can avoid it).
+
+/colors   New. §5
+/framing  New. §6
+/quote    Full form. §4
+/contact  Mailto form. §3
+
+Design tokens stay: Ink #1A120C, Barn #5C3317, Wood #8B5A2B, Cream #F4EDE3, Paper #FBF7F1. Fraunces + Outfit. Photography-first. No purple/gold slop.
 
 ========================================
 QUALITY
 ========================================
 
 - Typecheck and production build must pass.
-- Desktop + mobile 390px: no 404 images, no chopped gables on the hero, no horizontal overflow, no duplicate tiles of the same job.
-- Every <img> src exists in public/.
-- Copy sounds like a builder. Short. Specific. True.
+- Desktop + mobile 390px: hero is wrap-porch, Featured is the tan barndo, Recent work does not repeat either of those or Bethpage. No 404 images. No horizontal overflow.
+- Facebook icon is in the header and the footer and links to the real page.
+- Colors page has 13 swatches: no Navy, no Copper, no Silver; Galvanized / Galvalume not “Vintage Metallic”.
+- Framing page shows lean-to attached to a gabled main building.
+- Quote and Contact mailto sales@thebarncentral.com with the filled fields.
 - When done, leave the preview running.
 
 Start now from https://github.com/SpiderForce-Star/Barn-Central
