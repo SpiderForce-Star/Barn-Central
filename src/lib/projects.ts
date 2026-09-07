@@ -17,7 +17,7 @@ export const projects: Project[] = [
     title: "50×60×16 with dual porches",
     location: "Bethpage, TN",
     spec: "50×60×16 · two 12×60 porches",
-    category: "barn",
+    category: "shop",
     image: "/buildings/hero-bethpage.jpg",
     featured: true,
     notes:
@@ -28,7 +28,7 @@ export const projects: Project[] = [
     title: "Bethpage, full yard",
     location: "Bethpage, TN",
     spec: "50×60×16 · dual porches",
-    category: "barn",
+    category: "shop",
     image: "/buildings/fb-wide.jpg",
     notes:
       "Wide shot of the finished shop — white walls, charcoal roof, timber porches, gravel apron.",
@@ -38,26 +38,20 @@ export const projects: Project[] = [
     title: "Open center bay",
     location: "Bethpage, TN",
     spec: "50×60×16",
-    category: "barn",
+    category: "shop",
     image: "/buildings/fb-open-bay.jpg",
     notes:
       "Drive-through bay on the Bethpage job. Equipment rolls straight in; porches run the eaves on both sides.",
   },
   {
-    id: "two-bay",
-    title: "Two-bay white barn",
-    category: "barn",
-    image: "/buildings/r1c-two-bay.jpg",
-    notes: "Gable-end open bays with a side lean-to. From Barn Central's Facebook photos.",
-  },
-  {
-    id: "open-gable",
-    title: "Open-gable storage barn",
-    spec: "Posted February 26, 2026",
-    category: "barn",
-    image: "/buildings/barn-open-gable.jpg",
+    id: "gallatin-red",
+    title: "Black on red, Gallatin",
+    location: "Gallatin, TN",
+    spec: "Posted March 3, 2026",
+    category: "shop",
+    image: "/buildings/shop-gallatin-red.jpg",
     notes:
-      "From Barn Central's Facebook. Dark metal walls, open gable end, exposed wood rafters, built for equipment and hay.",
+      "From Barn Central's Facebook: “Who loves the black on red combo.” Red vertical-rib walls, charcoal roof, wood-post lean-to, window on the eave.",
   },
   {
     id: "wrap-porch",
@@ -87,6 +81,22 @@ export const projects: Project[] = [
     image: "/buildings/gray-four-door.jpg",
     notes:
       "Enclosed shop with four overheads on the eave, walk door, gravel apron. Posted on Barn Central's Facebook.",
+  },
+  {
+    id: "two-bay",
+    title: "Two-bay white barn",
+    category: "barn",
+    image: "/buildings/r1c-two-bay.jpg",
+    notes: "Gable-end open bays with a side lean-to. From Barn Central's Facebook photos.",
+  },
+  {
+    id: "open-gable",
+    title: "Open-gable storage barn",
+    spec: "Posted February 26, 2026",
+    category: "barn",
+    image: "/buildings/barn-open-gable.jpg",
+    notes:
+      "From Barn Central's Facebook. Dark metal walls, open gable end, exposed wood rafters, built for equipment and hay.",
   },
 ];
 

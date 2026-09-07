@@ -42,6 +42,7 @@ export const cities = [
   "Lebanon",
   "Hartsville",
   "Smyrna",
+  "Westmoreland",
   "Nashville",
   "Franklin",
   "Murfreesboro",
@@ -107,7 +108,7 @@ export const services = [
     id: "shops",
     title: "Garage / Shops",
     href: "/services#shops",
-    image: "/buildings/gray-four-door.jpg",
+    image: "/buildings/shop-gallatin-red.jpg",
     blurb:
       "Garages and enclosed shops with overheads sized for the trucks and tools you run. Clear span, gravel or slab.",
   },
