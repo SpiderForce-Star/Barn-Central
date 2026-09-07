@@ -7,27 +7,12 @@ type Props = {
   porch: "none" | "one" | "two";
   porchDepth: number;
   colorId: string;
-  openBay?: boolean;
 };
 
-function iso(x: number, y: number, z: number) {
-  const sx = 210 + (x - z) * 0.86;
-  const sy = 210 - y * 0.92 - (x + z) * 0.32;
-  return `${sx.toFixed(1)},${sy.toFixed(1)}`;
-}
-
-function poly(pts: [number, number, number][], fill: string, opacity = 1) {
-  return (
-    <polygon
-      points={pts.map(([x, y, z]) => iso(x, y, z)).join(" ")}
-      fill={fill}
-      opacity={opacity}
-      stroke="rgba(26,18,12,0.18)"
-      strokeWidth="0.6"
-    />
-  );
-}
-
+/**
+ * Gable-end elevation — the view a metal-building quote is actually drawn in.
+ * Width and porch depth scale. Length is labeled, not faked in perspective.
+ */
 export function BuildingPreview({
   width,
   length,
@@ -35,182 +20,135 @@ export function BuildingPreview({
   porch,
   porchDepth,
   colorId,
-  openBay = true,
 }: Props) {
   const color = wallColors.find((c) => c.id === colorId) ?? wallColors[0];
-  const w = 46 + (width / 80) * 54;
-  const d = 36 + (length / 120) * 58;
-  const h = 22 + ((height - 8) / 12) * 28;
-  const roof = h + 16;
-  const lean = porch === "none" ? 0 : 10 + (porchDepth / 16) * 10;
-  const both = porch === "two";
-  const one = porch === "one" || both;
+  const leftPorch = porch === "two";
+  const rightPorch = porch === "one" || porch === "two";
+  const porchEach = porch === "none" ? 0 : porchDepth;
+  const span = width + porchEach * (leftPorch && rightPorch ? 2 : rightPorch || leftPorch ? 1 : 0);
 
-  const left = 0;
-  const right = w;
-  const front = 0;
-  const back = d;
+  const VB_W = 640;
+  const VB_H = 320;
+  const padX = 36;
+  const groundY = 268;
+  const maxDrawW = VB_W - padX * 2;
+  const maxWallH = 168;
+  const px = maxDrawW / Math.max(span, 24);
+  const wallH = Math.min(maxWallH, Math.max(72, height * 7.2));
+  const roofH = Math.max(28, wallH * 0.28);
+  const porchW = porchEach * px;
+  const bodyW = width * px;
+  const startX =
+    padX + (maxDrawW - (bodyW + (leftPorch ? porchW : 0) + (rightPorch ? porchW : 0))) / 2;
+  const bodyX = startX + (leftPorch ? porchW : 0);
+  const eaveY = groundY - wallH;
+  const peakX = bodyX + bodyW / 2;
+  const peakY = eaveY - roofH;
+  const porchEave = wallH * 0.62;
+  const porchY = groundY - porchEave;
+
+  const caption =
+    porch === "none"
+      ? `${width}×${length}×${height}`
+      : `${width}×${length}×${height} · ${porch === "two" ? "two" : "one"} ${porchDepth}' ${porch === "two" ? "porches" : "porch"}`;
 
   return (
     <div className="relative overflow-hidden rounded-lg bg-cream">
-      <svg viewBox="0 0 420 280" className="h-auto w-full" aria-hidden="true">
-        <defs>
-          <linearGradient id="sky" x1="0" x2="0" y1="0" y2="1">
-            <stop offset="0%" stopColor="#d7e4ef" />
-            <stop offset="55%" stopColor="#e7ece4" />
-            <stop offset="100%" stopColor="#c9b89a" />
-          </linearGradient>
-        </defs>
-        <rect width="420" height="280" fill="url(#sky)" />
-        <ellipse cx="210" cy="232" rx="170" ry="18" fill="rgba(26,18,12,0.08)" />
+      <svg viewBox={`0 0 ${VB_W} ${VB_H}`} className="h-auto w-full" role="img" aria-label={caption}>
+        <rect width={VB_W} height={VB_H} fill="#e9e1d4" />
+        <rect x="0" y={groundY} width={VB_W} height={VB_H - groundY} fill="#d4c6b0" />
+        <line x1="0" y1={groundY} x2={VB_W} y2={groundY} stroke="#8b5a2b" strokeWidth="2" />
 
-        {both
-          ? poly(
-              [
-                [left - lean, 0, front],
-                [left, 0, front],
-                [left, 0, back],
-                [left - lean, 0, back],
-              ],
-              "#b7b1a6",
-            )
-          : null}
-        {one
-          ? poly(
-              [
-                [right, 0, front],
-                [right + lean, 0, front],
-                [right + lean, 0, back],
-                [right, 0, back],
-              ],
-              "#b7b1a6",
-            )
-          : null}
-
-        {poly(
-          [
-            [left, 0, back],
-            [right, 0, back],
-            [right, h, back],
-            [left, h, back],
-          ],
-          color.wall,
-          0.82,
-        )}
-        {poly(
-          [
-            [right, 0, front],
-            [right, 0, back],
-            [right, h, back],
-            [right, h, front],
-          ],
-          color.wall,
-          0.7,
-        )}
-        {poly(
-          [
-            [left, 0, front],
-            [right, 0, front],
-            [right, h, front],
-            [left, h, front],
-          ],
-          color.wall,
-        )}
-        {poly(
-          [
-            [left, h, front],
-            [right, h, front],
-            [(left + right) / 2, roof, front],
-          ],
-          color.wall,
-        )}
-
-        {poly(
-          [
-            [left, h, front],
-            [(left + right) / 2, roof, front],
-            [(left + right) / 2, roof, back],
-            [left, h, back],
-          ],
-          color.roof,
-          0.95,
-        )}
-        {poly(
-          [
-            [right, h, front],
-            [(left + right) / 2, roof, front],
-            [(left + right) / 2, roof, back],
-            [right, h, back],
-          ],
-          color.roof,
-          0.78,
-        )}
-
-        {openBay
-          ? poly(
-              [
-                [left + w * 0.28, 0, front],
-                [right - w * 0.28, 0, front],
-                [right - w * 0.28, h * 0.82, front],
-                [left + w * 0.28, h * 0.82, front],
-              ],
-              "#1a120c",
-              0.55,
-            )
-          : null}
-
-        {one ? (
+        {leftPorch ? (
           <g>
-            {poly(
-              [
-                [right, 0, front],
-                [right + lean, 0, front],
-                [right + lean, h * 0.55, front],
-                [right, h * 0.72, front],
-              ],
-              "#c4a574",
-              0.55,
-            )}
-            {poly(
-              [
-                [right, h * 0.72, front],
-                [right + lean, h * 0.55, front],
-                [right + lean, h * 0.55, back],
-                [right, h * 0.72, back],
-              ],
-              color.roof,
-              0.88,
-            )}
+            <polygon
+              points={`${startX},${porchY} ${bodyX},${eaveY + 8} ${bodyX},${groundY} ${startX},${groundY}`}
+              fill={color.wall}
+              stroke="#1a120c"
+              strokeWidth="1.2"
+              opacity="0.92"
+            />
+            <polygon
+              points={`${startX},${porchY} ${bodyX},${eaveY + 8} ${bodyX + 10},${eaveY + 2} ${startX + 10},${porchY - 6}`}
+              fill={color.roof}
+            />
+            {[0.18, 0.5, 0.82].map((t) => (
+              <rect
+                key={`lp${t}`}
+                x={startX + porchW * t - 3}
+                y={porchY + 8}
+                width="6"
+                height={groundY - porchY - 8}
+                fill="#6b4a2f"
+              />
+            ))}
           </g>
         ) : null}
-        {both ? (
+
+        {rightPorch ? (
           <g>
-            {poly(
-              [
-                [left, 0, front],
-                [left - lean, 0, front],
-                [left - lean, h * 0.55, front],
-                [left, h * 0.72, front],
-              ],
-              "#c4a574",
-              0.4,
-            )}
-            {poly(
-              [
-                [left, h * 0.72, front],
-                [left - lean, h * 0.55, front],
-                [left - lean, h * 0.55, back],
-                [left, h * 0.72, back],
-              ],
-              color.roof,
-              0.9,
-            )}
+            <polygon
+              points={`${bodyX + bodyW},${eaveY + 8} ${bodyX + bodyW + porchW},${porchY} ${bodyX + bodyW + porchW},${groundY} ${bodyX + bodyW},${groundY}`}
+              fill={color.wall}
+              stroke="#1a120c"
+              strokeWidth="1.2"
+              opacity="0.92"
+            />
+            <polygon
+              points={`${bodyX + bodyW},${eaveY + 8} ${bodyX + bodyW + porchW},${porchY} ${bodyX + bodyW + porchW - 10},${porchY - 6} ${bodyX + bodyW - 10},${eaveY + 2}`}
+              fill={color.roof}
+            />
+            {[0.18, 0.5, 0.82].map((t) => (
+              <rect
+                key={`rp${t}`}
+                x={bodyX + bodyW + porchW * t - 3}
+                y={porchY + 8}
+                width="6"
+                height={groundY - porchY - 8}
+                fill="#6b4a2f"
+              />
+            ))}
           </g>
         ) : null}
+
+        <rect
+          x={bodyX}
+          y={eaveY}
+          width={bodyW}
+          height={wallH}
+          fill={color.wall}
+          stroke="#1a120c"
+          strokeWidth="1.4"
+        />
+        <polygon
+          points={`${bodyX},${eaveY} ${peakX},${peakY} ${bodyX + bodyW},${eaveY}`}
+          fill={color.wall}
+          stroke="#1a120c"
+          strokeWidth="1.4"
+        />
+        <polygon
+          points={`${bodyX - 6},${eaveY + 4} ${peakX},${peakY - 4} ${bodyX + bodyW + 6},${eaveY + 4} ${bodyX + bodyW},${eaveY} ${peakX},${peakY} ${bodyX},${eaveY}`}
+          fill={color.roof}
+        />
+
+        <rect
+          x={bodyX + bodyW * 0.28}
+          y={eaveY + wallH * 0.28}
+          width={bodyW * 0.44}
+          height={wallH * 0.72}
+          fill="#1a120c"
+          opacity="0.55"
+        />
+        <rect
+          x={bodyX + bodyW * 0.28}
+          y={eaveY + wallH * 0.28}
+          width={bodyW * 0.44}
+          height="5"
+          fill={color.trim}
+        />
       </svg>
-      <div className="pointer-events-none absolute bottom-3 left-3 rounded-md bg-ink/70 px-2.5 py-1 font-sans text-xs tracking-wide text-cream">
-        {width}×{length}×{height}
-        {porch !== "none" ? ` · ${porch === "two" ? "two" : "one"} ${porchDepth}' porch` : ""}
+      <div className="pointer-events-none absolute bottom-3 left-3 rounded-md bg-ink/75 px-2.5 py-1 font-sans text-xs tracking-wide text-cream">
+        {caption}
       </div>
     </div>
   );

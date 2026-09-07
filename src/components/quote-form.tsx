@@ -32,9 +32,9 @@ const defaults: QuoteState = {
   city: "",
   county: "Sumner",
   type: "barn",
-  width: 40,
+  width: 50,
   length: 60,
-  height: 14,
+  height: 16,
   porch: "two",
   porchDepth: 12,
   colorId: "white",
@@ -50,6 +50,20 @@ function footprint(q: QuoteState) {
   return { main, porch, total: main + porch };
 }
 
+function typeLabel(id: string) {
+  return buildingTypes.find((t) => t.id === id)?.label ?? id;
+}
+
+function specLine(q: QuoteState, sq: ReturnType<typeof footprint>) {
+  const porch =
+    q.porch === "none"
+      ? "no porch"
+      : q.porch === "two"
+        ? `two ${q.porchDepth}' porches`
+        : `one ${q.porchDepth}' porch`;
+  return `${q.width}×${q.length}×${q.height} ${typeLabel(q.type).toLowerCase()} · ${porch} · ${sq.total.toLocaleString()} sf`;
+}
+
 function mailBody(q: QuoteState, sq: ReturnType<typeof footprint>) {
   return [
     `Quote request from ${q.name}`,
@@ -57,10 +71,10 @@ function mailBody(q: QuoteState, sq: ReturnType<typeof footprint>) {
     `Email: ${q.email}`,
     `City: ${q.city}  County: ${q.county}`,
     ``,
-    `Type: ${q.type}`,
+    `Type: ${typeLabel(q.type)}`,
     `Size: ${q.width} x ${q.length} x ${q.height}`,
     `Porch: ${q.porch}${q.porch === "none" ? "" : ` · ${q.porchDepth}' deep`}`,
-    `Color: ${q.colorId}`,
+    `Color: ${wallColors.find((c) => c.id === q.colorId)?.label ?? q.colorId}`,
     `Slab: ${q.slab}`,
     `Timeline: ${q.timeline || "not specified"}`,
     `Footprint: ${sq.total.toLocaleString()} sf (building ${sq.main.toLocaleString()} + porch ${sq.porch.toLocaleString()})`,
@@ -106,18 +120,7 @@ export function QuoteForm({ compact = false }: { compact?: boolean }) {
           Your mail app should open with the size, porches, and contact details. If it
           does not, call {site.phone} or write {site.email}.
         </p>
-        <dl className="mt-6 grid gap-2 text-sm text-ink sm:grid-cols-2">
-          <div>
-            <dt className="text-xs uppercase tracking-[0.14em] text-muted">Building</dt>
-            <dd>
-              {q.width}×{q.length}×{q.height} · {q.type}
-            </dd>
-          </div>
-          <div>
-            <dt className="text-xs uppercase tracking-[0.14em] text-muted">Footprint</dt>
-            <dd>{sq.total.toLocaleString()} sf</dd>
-          </div>
-        </dl>
+        <p className="mt-4 font-display text-lg text-ink">{specLine(q, sq)}</p>
         <Button className="mt-6" type="button" variant="outline" onClick={() => setSent(false)}>
           Edit the spec
         </Button>
@@ -136,6 +139,7 @@ export function QuoteForm({ compact = false }: { compact?: boolean }) {
           porchDepth={q.porchDepth}
           colorId={q.colorId}
         />
+        <p className="mt-3 font-display text-lg text-ink">{specLine(q, sq)}</p>
         <div className="mt-4 grid grid-cols-3 gap-3 text-center">
           <div className="rounded-md bg-cream px-2 py-3">
             <p className="text-xs uppercase tracking-[0.14em] text-muted">Building</p>
@@ -162,9 +166,20 @@ export function QuoteForm({ compact = false }: { compact?: boolean }) {
       </div>
 
       <div className={cn("grid gap-5 lg:col-span-7", compact && "lg:col-span-12")}>
+        <div className="grid gap-4 sm:grid-cols-2">
+          <div className="grid gap-2">
+            <Label htmlFor="name">Name</Label>
+            <Input id="name" value={q.name} onChange={(e) => set("name", e.target.value)} required autoComplete="name" />
+          </div>
+          <div className="grid gap-2">
+            <Label htmlFor="phone">Phone</Label>
+            <Input id="phone" value={q.phone} onChange={(e) => set("phone", e.target.value)} required autoComplete="tel" />
+          </div>
+        </div>
+
         <fieldset className="grid gap-3">
           <Label>Building type</Label>
-          <div className="flex flex-wrap gap-2">
+          <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
             {buildingTypes.map((t) => (
               <button
                 key={t.id}
@@ -271,17 +286,6 @@ export function QuoteForm({ compact = false }: { compact?: boolean }) {
               ))}
             </select>
           </div>
-        </div>
-
-        <div className="grid gap-4 sm:grid-cols-2">
-          <div className="grid gap-2">
-            <Label htmlFor="name">Name</Label>
-            <Input id="name" value={q.name} onChange={(e) => set("name", e.target.value)} required autoComplete="name" />
-          </div>
-          <div className="grid gap-2">
-            <Label htmlFor="phone">Phone</Label>
-            <Input id="phone" value={q.phone} onChange={(e) => set("phone", e.target.value)} required autoComplete="tel" />
-          </div>
           <div className="grid gap-2">
             <Label htmlFor="email">Email</Label>
             <Input
@@ -308,10 +312,10 @@ export function QuoteForm({ compact = false }: { compact?: boolean }) {
           />
         </div>
         <div className="grid gap-2">
-          <Label htmlFor="notes">Anything else</Label>
+          <Label htmlFor="notes">Doors, lean-tos, living space, site…</Label>
           <Textarea
             id="notes"
-            placeholder="Doors, lean-tos, living space, site access…"
+            placeholder="Overheads, walk doors, loft, finish-out…"
             value={q.notes}
             onChange={(e) => set("notes", e.target.value)}
           />
@@ -323,10 +327,13 @@ export function QuoteForm({ compact = false }: { compact?: boolean }) {
           <Button type="submit" size="lg">
             Send this spec
           </Button>
-          <p className="text-xs text-muted">
-            Opens an email to {site.email}. No account. No spam list.
-          </p>
+          <Button type="button" size="lg" variant="outline" asChild>
+            <a href={site.phoneHref}>Call {site.phone}</a>
+          </Button>
         </div>
+        <p className="text-xs text-muted">
+          Opens an email to {site.email}. No account. This is a spec, not a price.
+        </p>
       </div>
     </form>
   );
@@ -349,11 +356,21 @@ function SliderField({
 }) {
   return (
     <label className="grid gap-2">
-      <span className="flex items-baseline justify-between">
+      <span className="flex items-baseline justify-between gap-2">
         <span className="text-xs font-medium uppercase tracking-[0.14em] text-muted">{label}</span>
-        <span className="font-display text-lg tabular-nums text-ink">
-          {value}
-          <span className="ml-0.5 text-xs text-muted">{unit}</span>
+        <span className="inline-flex items-baseline gap-1 font-display text-lg tabular-nums text-ink">
+          <input
+            type="number"
+            min={min}
+            max={max}
+            value={value}
+            onChange={(e) => {
+              const n = Number(e.target.value);
+              if (Number.isFinite(n)) onChange(Math.min(max, Math.max(min, Math.round(n))));
+            }}
+            className="w-14 border-0 bg-transparent p-0 text-right font-display text-lg tabular-nums text-ink outline-none"
+          />
+          <span className="text-xs text-muted">{unit}</span>
         </span>
       </span>
       <input
