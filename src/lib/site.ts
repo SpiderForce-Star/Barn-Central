@@ -1,6 +1,7 @@
 export const site = {
   name: "Barn Central",
   tagline: "Your go-to barn and barndominium builder of Middle Tennessee.",
+  pitch: "We design to your needs and wants. We supply and construct on your site.",
   phone: "(615) 693-9925",
   phoneHref: "tel:+16156939925",
   email: "sales@thebarncentral.com",
@@ -40,6 +41,7 @@ export const cities = [
   "White House",
   "Lebanon",
   "Hartsville",
+  "Smyrna",
   "Nashville",
   "Franklin",
   "Murfreesboro",
@@ -50,13 +52,9 @@ export const cities = [
 ] as const;
 
 export const buildingTypes = [
-  { id: "barn", label: "Barn" },
-  { id: "barndo", label: "Barndominium" },
-  { id: "venue", label: "Venue" },
-  { id: "warehouse", label: "Warehouse" },
-  { id: "storage", label: "Storage / shop" },
-  { id: "pavilion", label: "Open pavilion" },
-  { id: "other", label: "Something else" },
+  { id: "barn", label: "Barn / Storage" },
+  { id: "shop", label: "Garage / Shop" },
+  { id: "barndo", label: "Barndo / Home" },
 ] as const;
 
 export const wallColors = [
@@ -72,7 +70,7 @@ export const processSteps = [
   {
     n: "01",
     title: "Walk the need",
-    body: "Call or send sizes. We talk through use — equipment, living space, events, storage — and what the site will actually allow.",
+    body: "Call or send sizes. We design to your needs and wants — equipment, livestock, living space, or storage — and what the site will actually allow.",
   },
   {
     n: "02",
@@ -86,8 +84,8 @@ export const processSteps = [
   },
   {
     n: "04",
-    title: "Raise the steel",
-    body: "Frame, roof, siding, openings. Porches and lean-tos go on as designed — wood posts, metal, or both.",
+    title: "Raise it on your site",
+    body: "We supply and construct on your site. Frame, roof, siding, openings. Porches and lean-tos go on as designed.",
   },
   {
     n: "05",
@@ -99,37 +97,26 @@ export const processSteps = [
 export const services = [
   {
     id: "barns",
-    title: "Barns",
+    title: "Barns / Storage",
     href: "/services#barns",
-    image: "/buildings/hero-bethpage.jpg",
-    blurb: "Equipment barns, livestock, hay, and shop space. Open bays, overhead doors, or a mix.",
+    image: "/buildings/barn-open-gable.jpg",
+    blurb:
+      "Livestock, hay, equipment, RV, boat, and tractor storage. Open bays, enclosed walls, or a mix — sized to the work.",
+  },
+  {
+    id: "shops",
+    title: "Garage / Shops",
+    href: "/services#shops",
+    image: "/buildings/gray-four-door.jpg",
+    blurb:
+      "Garages and enclosed shops with overheads sized for the trucks and tools you run. Clear span, gravel or slab.",
   },
   {
     id: "barndos",
-    title: "Barndominiums",
+    title: "Barndos / Homes",
     href: "/services#barndos",
     image: "/buildings/r1b-wrap-porch.jpg",
-    blurb: "Shop now, live later — or both. Windows, porches, and a shell built to finish out.",
-  },
-  {
-    id: "venues",
-    title: "Venues",
-    href: "/services#venues",
-    image: "/buildings/fb-wide.jpg",
-    blurb: "Open pavilions and enclosed event barns for farms that host more than livestock.",
-  },
-  {
-    id: "warehouses",
-    title: "Warehouses",
-    href: "/services#warehouses",
-    image: "/buildings/gray-four-door.jpg",
-    blurb: "Clear-span shops and warehouses with overhead doors sized for the work you do.",
-  },
-  {
-    id: "storage",
-    title: "Storage",
-    href: "/services#storage",
-    image: "/buildings/r1c-two-bay.jpg",
-    blurb: "RV, boat, tractor, and inventory storage that outlasts a rented unit.",
+    blurb:
+      "A shell built to finish into living space — shop now, live later, or both. Windows, porches, and wall height that leave room to live.",
   },
 ] as const;

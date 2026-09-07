@@ -21,12 +21,11 @@ function Home() {
             Middle Tennessee
           </p>
           <h1 className="mt-3 max-w-3xl font-display text-3xl font-medium leading-[1.05] text-paper">
-            Barns built for the work,
-            <br className="hidden sm:block" /> and the weather.
+            We design to your needs and wants.
           </h1>
           <p className="mt-5 max-w-xl text-base leading-relaxed text-cream/80 sm:text-lg">
-            Custom barns, barndominiums, shops, and storage — from the pad to the
-            porch. {site.tagline}
+            We supply and construct on your site. Barns and storage, garages and shops,
+            barndos and homes. {site.tagline}
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
             <Button asChild size="lg" variant="invert">
@@ -51,9 +50,9 @@ function Home() {
       <section className="border-b border-border bg-cream">
         <div className="mx-auto grid max-w-6xl gap-8 px-4 py-10 sm:grid-cols-3 sm:px-6">
           {[
-            ["Where", "Bethpage, Gallatin, Portland, and across Middle Tennessee"],
-            ["What", "Barns · Barndos · Venues · Warehouses · Storage"],
-            ["How", "Dirt work, pad, steel, porches — one crew, one spec"],
+            ["Where", "Bethpage, Gallatin, Smyrna, Portland, and across Middle Tennessee"],
+            ["What", "Barns / Storage · Garage / Shops · Barndos / Homes"],
+            ["How", "We design it. We supply it. We raise it on your site."],
           ].map(([k, v]) => (
             <div key={k}>
               <p className="text-xs font-medium uppercase tracking-[0.18em] text-wood">{k}</p>
@@ -97,13 +96,13 @@ function Home() {
           <div className="flex items-end justify-between gap-4">
             <div>
               <p className="text-xs font-medium uppercase tracking-[0.18em] text-wood">What we build</p>
-              <h2 className="mt-3 font-display text-2xl text-ink md:text-3xl">Five kinds of useful.</h2>
+              <h2 className="mt-3 font-display text-2xl text-ink md:text-3xl">Three structures. Your spec.</h2>
             </div>
             <Link to="/services" className="hidden text-sm font-medium text-barn hover:underline sm:inline">
               All services
             </Link>
           </div>
-          <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+          <ul className="mt-10 grid gap-4 sm:grid-cols-3">
             {services.map((s) => (
               <li key={s.id}>
                 <Link
@@ -153,7 +152,7 @@ function Home() {
       <section className="bg-ink py-20 text-cream">
         <div className="mx-auto max-w-6xl px-4 sm:px-6">
           <p className="text-xs font-medium uppercase tracking-[0.18em] text-plank">How a job runs</p>
-          <h2 className="mt-3 font-display text-2xl md:text-3xl">Pad first. Steel second. Porch last.</h2>
+          <h2 className="mt-3 font-display text-2xl md:text-3xl">Design it. Supply it. Raise it on your site.</h2>
           <ol className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
             {processSteps.map((step) => (
               <li key={step.n} className="border-t border-white/15 pt-4">
@@ -178,8 +177,7 @@ function Home() {
             Tell us the size. We’ll price the building.
           </h2>
           <p className="mx-auto mt-4 max-w-lg text-cream/75">
-            Use the quote tool to set width, length, eave, and porches. No account.
-            A real conversation after.
+            {site.pitch} No account. A real conversation after.
           </p>
           <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <Button asChild size="lg" variant="invert">

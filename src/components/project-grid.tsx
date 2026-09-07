@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
 import { categories, type Project, type ProjectCategory, projects } from "@/lib/projects";
+import { site } from "@/lib/site";
 import { cn } from "@/lib/utils";
 import { Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
@@ -65,6 +66,21 @@ export function ProjectGrid({
           </li>
         ))}
       </ul>
+
+      {list.length === 0 ? (
+        <p className="rounded-lg bg-cream px-4 py-8 text-sm leading-relaxed text-muted">
+          No photos in this category on the site yet. More jobs live on{" "}
+          <a
+            href={site.facebook}
+            target="_blank"
+            rel="noreferrer"
+            className="font-medium text-barn hover:underline"
+          >
+            Facebook
+          </a>
+          .
+        </p>
+      ) : null}
 
       <Dialog open={!!active} onOpenChange={(o) => !o && setActive(null)}>
         <DialogContent className="p-0">

@@ -1,6 +1,6 @@
 # Barn Central
 
-Website for **Barn Central** — barns, barndominiums, venues, warehouses, and storage in Middle Tennessee.
+Website for **Barn Central** — we design to your needs and wants. We supply and construct on your site. Barns / storage, garage / shops, and barndos / homes in Middle Tennessee.
 
 **Call** [(615) 693-9925](tel:+16156939925)  
 **Email** [sales@thebarncentral.com](mailto:sales@thebarncentral.com)  

@@ -11,8 +11,8 @@ export function SiteFooter() {
         <div className="md:col-span-5">
           <Logo invert />
           <p className="mt-4 max-w-sm text-sm leading-relaxed text-cream/70">
-            {site.tagline} Custom metal buildings — barns, barndominiums, venues,
-            warehouses, and storage — from pad to porch.
+            {site.tagline} {site.pitch} Barns and storage, garages and shops, barndos
+            and homes.
           </p>
         </div>
         <div className="md:col-span-3">

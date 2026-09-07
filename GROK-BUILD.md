@@ -24,9 +24,16 @@ Email: sales@thebarncentral.com
 Facebook (must stay linked, header/footer/gallery): https://www.facebook.com/profile.php?id=61587244332260
 Also valid: https://www.facebook.com/p/Barn-Central-61587244332260/
 Region: Middle Tennessee — Sumner, Wilson, Davidson, Robertson, Trousdale, Macon, and nearby counties.
-Towns: Bethpage, Gallatin, Hendersonville, Portland, White House, Lebanon, Hartsville, Nashville, Franklin, Murfreesboro, Springfield, Goodlettsville, Mt. Juliet, Lafayette.
+Towns: Bethpage, Gallatin, Hendersonville, Portland, White House, Lebanon, Hartsville, Smyrna, Nashville, Franklin, Murfreesboro, Springfield, Goodlettsville, Mt. Juliet, Lafayette.
 
-Services they actually offer: Barns, Barndominiums, Venues, Warehouses, Storage / shops.
+Selling line (use this wording, everywhere it fits): We design to your needs and wants. We supply and construct on your site.
+
+Three structures ONLY — do not list venues or warehouses as their own buckets:
+1. Barns / Storages
+2. Garage / Shops
+3. Barndos / Homes
+
+Quote chips, services page, and gallery filters must match these three.
 
 Featured job (confirmed Facebook post, Sept 1, 2026):
 50×60×16 shop in Bethpage, TN, with two 12×60 wood-post porches. White vertical-rib walls, charcoal roof, crushed-stone yard.
@@ -65,6 +72,9 @@ TWO-BAY WHITE BARN
 FOUR-DOOR ENCLOSED SHOP
 - public/buildings/gray-four-door.jpg    Four overheads on the eave, walk door, gravel apron.
 
+OPEN-GABLE STORAGE BARN (Facebook, Feb 26, 2026)
+- public/buildings/barn-open-gable.jpg   Dark metal walls, open gable end, exposed rafters.
+
 4. ALSO pull more photos from their Facebook page if you can reach them without login (plugin page, public CDN, Graph picture endpoints, mbasic, etc.). Save any NEW unique job photos into public/buildings/ with honest filenames and add them to the gallery. If Facebook login-walls the rest, do not invent substitutes — ship with the repo photos above and keep a clear “See more work on Facebook” link.
 
 5. Honest captions only. Do not invent locations except Bethpage for the 50×60×16. Do not invent owners, years in business, awards, reviews, or testimonials. Do not claim interiors, pads, or building types you do not have a real photo of.
@@ -77,10 +87,10 @@ A professional barn-builder marketing site. Not a template. Not purple/gold slop
 
 Pages:
 - /         Home — full-bleed hero using hero-bethpage.jpg, official logo in the header, tagline, phone CTA, featured Bethpage job, services strip using real photos, recent work grid, process, quote CTA.
-- /projects Work gallery — all Facebook job photos, filter Barns / Shops, lightbox with spec + notes, Facebook link for more.
-- /services Barns, Barndominiums, Venues, Warehouses, Storage. Each section uses a real photo from the map above (barns = Bethpage, shops/warehouses = four-door, storage = two-bay, barndos/venues = wrap-porch or Bethpage wide). Honest copy about what they build.
-- /about    Who they are, where they work (towns/counties), pad-to-porch process. Hero image from a real porch/job photo.
-- /quote    Size sliders (width, length, eave, porch none/one/two), building type, color, county. Live isometric preview is fine. Submit via mailto:sales@thebarncentral.com and also save the spec in localStorage. No accounts.
+- /projects Work gallery — all Facebook job photos, filter Barns / Storage · Garage / Shops · Barndos / Homes, lightbox with spec + notes, Facebook link for more.
+- /services Three sections only: Barns / Storage, Garage / Shops, Barndos / Homes. Each section uses a real photo (barns = open-gable or Bethpage, shops = four-door, barndos = wrap-porch until a true barndo photo lands). Honest copy.
+- /about    Who they are, where they work (towns/counties), pad-to-porch process. Lead with the selling line. Hero image from a real porch/job photo.
+- /quote    Size sliders (width, length, eave, porch none/one/two), building type chips for the three structures only, color, county. Live 2D gable-end elevation. Name + phone above the fold. Submit via mailto:sales@thebarncentral.com and also save the spec in localStorage. No accounts. Do not dump this page.
 
 Always-visible:
 - Header: official circular logo + Barn Central wordmark, Work / Services / About / Quote, phone.

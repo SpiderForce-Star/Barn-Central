@@ -19,7 +19,8 @@ function ProjectsPage() {
         >
           Facebook
         </a>
-        . Barns and shops around Middle Tennessee. Tap a photo for the spec.
+        . Filter barns and storage, garages and shops, or barndos and homes. Tap a
+        photo for the spec.
       </p>
       <div className="mt-10">
         <ProjectGrid />

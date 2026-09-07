@@ -15,7 +15,7 @@ export const Route = createRootRoute({
       {
         name: "description",
         content:
-          "Barn Central — barns, barndominiums, venues, warehouses, and storage. Your go-to builder in Middle Tennessee. Call (615) 693-9925.",
+          "Barn Central — we design to your needs and wants. We supply and construct on your site. Barns, shops, and barndos in Middle Tennessee. Call (615) 693-9925.",
       },
       { name: "theme-color", content: "#5C3317" },
     ],
