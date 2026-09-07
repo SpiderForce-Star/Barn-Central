@@ -83,6 +83,15 @@ export const projects: Project[] = [
       "Enclosed shop with four overheads on the eave, walk door, gravel apron. Posted on Barn Central's Facebook.",
   },
   {
+    id: "tan-balcony",
+    title: "Shop and living, with balcony",
+    spec: "Posted February 4, 2026",
+    category: "barndo",
+    image: "/buildings/barndo-tan-balcony.jpg",
+    notes:
+      "From Barn Central's Facebook. Tan vertical-rib walls, red roof, three overheads on the shop end, covered balcony on the living side.",
+  },
+  {
     id: "two-bay",
     title: "Two-bay white barn",
     category: "barn",

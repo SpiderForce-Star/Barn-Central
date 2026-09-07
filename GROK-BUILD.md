@@ -78,6 +78,9 @@ OPEN-GABLE STORAGE BARN (Facebook, Feb 26, 2026)
 GALLATIN RED SHOP (Facebook, March 3, 2026)
 - public/buildings/shop-gallatin-red.jpg Red walls, charcoal roof, wood-post lean-to. “Black on red combo.”
 
+TAN BARNDO WITH BALCONY (Facebook, Feb 4, 2026)
+- public/buildings/barndo-tan-balcony.jpg Tan walls, red roof, three overheads, covered balcony. Barndo / home.
+
 4. ALSO pull more photos from their Facebook page if you can reach them without login (plugin page, public CDN, Graph picture endpoints, mbasic, etc.). Save any NEW unique job photos into public/buildings/ with honest filenames and add them to the gallery. If Facebook login-walls the rest, do not invent substitutes — ship with the repo photos above and keep a clear “See more work on Facebook” link.
 
 5. Honest captions only. Do not invent locations except Bethpage for the 50×60×16. Do not invent owners, years in business, awards, reviews, or testimonials. Do not claim interiors, pads, or building types you do not have a real photo of.

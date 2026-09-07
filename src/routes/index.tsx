@@ -114,7 +114,7 @@ function Home() {
                     <img
                       src={s.image}
                       alt=""
-                      className="size-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                      className="size-full object-cover object-center transition-transform duration-500 group-hover:scale-[1.03]"
                     />
                   </span>
                   <span className="block p-4">

@@ -53,7 +53,7 @@ export function ProjectGrid({
                 <img
                   src={p.image}
                   alt={p.title}
-                  className="size-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                  className="size-full object-cover object-center transition-transform duration-500 group-hover:scale-[1.03]"
                 />
               </span>
               <span className="block p-4">
@@ -89,7 +89,7 @@ export function ProjectGrid({
               <img
                 src={active.image}
                 alt={active.title}
-                className="max-h-[56vh] w-full rounded-t-xl object-cover"
+                className="max-h-[56vh] w-full rounded-t-xl object-cover object-center"
               />
               <div className="space-y-3 p-5">
                 <DialogTitle>{active.title}</DialogTitle>

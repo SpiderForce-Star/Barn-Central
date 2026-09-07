@@ -47,7 +47,7 @@ function ServicesPage() {
               <img
                 src={s.image}
                 alt={s.title}
-                className="aspect-[4/3] w-full rounded-xl object-cover"
+                className="aspect-[4/3] w-full rounded-xl object-cover object-center"
               />
             </div>
             <div className="lg:col-span-6">

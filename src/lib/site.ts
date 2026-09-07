@@ -116,7 +116,7 @@ export const services = [
     id: "barndos",
     title: "Barndos / Homes",
     href: "/services#barndos",
-    image: "/buildings/r1b-wrap-porch.jpg",
+    image: "/buildings/barndo-tan-balcony.jpg",
     blurb:
       "A shell built to finish into living space — shop now, live later, or both. Windows, porches, and wall height that leave room to live.",
   },
