@@ -11,6 +11,12 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
+import { Route as AccessoriesRouteImport } from './routes/accessories'
+import { Route as ColorsRouteImport } from './routes/colors'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as FramingRouteImport } from './routes/framing'
+import { Route as InsulationRouteImport } from './routes/insulation'
+import { Route as OptionsRouteImport } from './routes/options'
 import { Route as ProjectsRouteImport } from './routes/projects'
 import { Route as QuoteRouteImport } from './routes/quote'
 import { Route as ServicesRouteImport } from './routes/services'
@@ -23,6 +29,36 @@ const IndexRoute = IndexRouteImport.update({
 const AboutRoute = AboutRouteImport.update({
   id: '/about',
   path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AccessoriesRoute = AccessoriesRouteImport.update({
+  id: '/accessories',
+  path: '/accessories',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ColorsRoute = ColorsRouteImport.update({
+  id: '/colors',
+  path: '/colors',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FramingRoute = FramingRouteImport.update({
+  id: '/framing',
+  path: '/framing',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InsulationRoute = InsulationRouteImport.update({
+  id: '/insulation',
+  path: '/insulation',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OptionsRoute = OptionsRouteImport.update({
+  id: '/options',
+  path: '/options',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ProjectsRoute = ProjectsRouteImport.update({
@@ -44,6 +80,12 @@ const ServicesRoute = ServicesRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/accessories': typeof AccessoriesRoute
+  '/colors': typeof ColorsRoute
+  '/contact': typeof ContactRoute
+  '/framing': typeof FramingRoute
+  '/insulation': typeof InsulationRoute
+  '/options': typeof OptionsRoute
   '/projects': typeof ProjectsRoute
   '/quote': typeof QuoteRoute
   '/services': typeof ServicesRoute
@@ -51,6 +93,12 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/accessories': typeof AccessoriesRoute
+  '/colors': typeof ColorsRoute
+  '/contact': typeof ContactRoute
+  '/framing': typeof FramingRoute
+  '/insulation': typeof InsulationRoute
+  '/options': typeof OptionsRoute
   '/projects': typeof ProjectsRoute
   '/quote': typeof QuoteRoute
   '/services': typeof ServicesRoute
@@ -59,21 +107,67 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/accessories': typeof AccessoriesRoute
+  '/colors': typeof ColorsRoute
+  '/contact': typeof ContactRoute
+  '/framing': typeof FramingRoute
+  '/insulation': typeof InsulationRoute
+  '/options': typeof OptionsRoute
   '/projects': typeof ProjectsRoute
   '/quote': typeof QuoteRoute
   '/services': typeof ServicesRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/projects' | '/quote' | '/services'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/accessories'
+    | '/colors'
+    | '/contact'
+    | '/framing'
+    | '/insulation'
+    | '/options'
+    | '/projects'
+    | '/quote'
+    | '/services'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/projects' | '/quote' | '/services'
-  id: '__root__' | '/' | '/about' | '/projects' | '/quote' | '/services'
+  to:
+    | '/'
+    | '/about'
+    | '/accessories'
+    | '/colors'
+    | '/contact'
+    | '/framing'
+    | '/insulation'
+    | '/options'
+    | '/projects'
+    | '/quote'
+    | '/services'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/accessories'
+    | '/colors'
+    | '/contact'
+    | '/framing'
+    | '/insulation'
+    | '/options'
+    | '/projects'
+    | '/quote'
+    | '/services'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  AccessoriesRoute: typeof AccessoriesRoute
+  ColorsRoute: typeof ColorsRoute
+  ContactRoute: typeof ContactRoute
+  FramingRoute: typeof FramingRoute
+  InsulationRoute: typeof InsulationRoute
+  OptionsRoute: typeof OptionsRoute
   ProjectsRoute: typeof ProjectsRoute
   QuoteRoute: typeof QuoteRoute
   ServicesRoute: typeof ServicesRoute
@@ -93,6 +187,48 @@ declare module '@tanstack/react-router' {
       path: '/about'
       fullPath: '/about'
       preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/accessories': {
+      id: '/accessories'
+      path: '/accessories'
+      fullPath: '/accessories'
+      preLoaderRoute: typeof AccessoriesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/colors': {
+      id: '/colors'
+      path: '/colors'
+      fullPath: '/colors'
+      preLoaderRoute: typeof ColorsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/framing': {
+      id: '/framing'
+      path: '/framing'
+      fullPath: '/framing'
+      preLoaderRoute: typeof FramingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/insulation': {
+      id: '/insulation'
+      path: '/insulation'
+      fullPath: '/insulation'
+      preLoaderRoute: typeof InsulationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/options': {
+      id: '/options'
+      path: '/options'
+      fullPath: '/options'
+      preLoaderRoute: typeof OptionsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/projects': {
@@ -122,6 +258,12 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  AccessoriesRoute: AccessoriesRoute,
+  ColorsRoute: ColorsRoute,
+  ContactRoute: ContactRoute,
+  FramingRoute: FramingRoute,
+  InsulationRoute: InsulationRoute,
+  OptionsRoute: OptionsRoute,
   ProjectsRoute: ProjectsRoute,
   QuoteRoute: QuoteRoute,
   ServicesRoute: ServicesRoute,

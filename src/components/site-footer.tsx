@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { Mail, Phone } from "lucide-react";
+import { FacebookIcon } from "@/components/facebook-icon";
 import { Logo } from "@/components/logo";
 import { nav, site } from "@/lib/site";
 
@@ -25,6 +26,16 @@ export function SiteFooter() {
                 </Link>
               </li>
             ))}
+            <li>
+              <Link to="/contact" className="text-cream/80 hover:text-cream">
+                Contact
+              </Link>
+            </li>
+            <li>
+              <Link to="/quote" className="text-cream/80 hover:text-cream">
+                Get a quote
+              </Link>
+            </li>
           </ul>
         </div>
         <div className="md:col-span-4">
@@ -47,8 +58,10 @@ export function SiteFooter() {
                 href={site.facebook}
                 target="_blank"
                 rel="noreferrer"
-                className="text-cream/80 hover:text-cream"
+                aria-label="Barn Central on Facebook"
+                className="inline-flex items-center gap-2 text-cream/80 hover:text-cream"
               >
+                <FacebookIcon className="size-4" />
                 Facebook
               </a>
             </li>
