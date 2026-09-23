@@ -13,10 +13,13 @@ function Home() {
       <section className="pt-16 sm:pt-[4.25rem]">
         <img
           src="/buildings/hero-full-structure.jpg"
-          alt="Full view of a tan metal building with a red roof, overhead doors, and a covered wood balcony"
-          width={3532}
-          height={1186}
-          className="block h-auto w-full max-w-[1687px] mx-auto"
+          srcSet="/buildings/hero-800.jpg 800w, /buildings/hero-full-structure.jpg 1687w"
+          sizes="(min-width: 1687px) 1687px, 100vw"
+          width={1687}
+          height={567}
+          alt="Barn Central shop and living building with three overheads, covered porch, and balcony"
+          className="mx-auto block h-auto w-full max-w-[1687px]"
+          fetchPriority="high"
         />
         <div className="bg-ink">
           <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16">
