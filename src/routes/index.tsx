@@ -10,34 +10,37 @@ export const Route = createFileRoute("/")({ component: Home });
 function Home() {
   return (
     <main>
-      <section className="relative min-h-[100svh] overflow-hidden">
+      <section className="pt-16 sm:pt-[4.25rem]">
         <img
-          src="/buildings/r1b-wrap-porch.jpg"
-          alt="Timber wrap porch on a Barn Central building in Middle Tennessee"
-          className="absolute inset-0 size-full object-cover object-[50%_78%] max-sm:object-[50%_72%]"
+          src="/buildings/hero-full-structure.jpg"
+          alt="Full view of a tan metal building with a red roof, overhead doors, and a covered wood balcony"
+          width={3532}
+          height={1186}
+          className="block h-auto w-full max-w-[1687px] mx-auto"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/50 to-ink/25" />
-        <div className="relative mx-auto flex min-h-[100svh] max-w-6xl flex-col justify-end px-4 pb-16 pt-28 sm:px-6 sm:pb-20">
-          <p className="text-xs font-medium uppercase tracking-[0.28em] text-clay">Middle Tennessee</p>
-          <h1 className="mt-3 max-w-3xl font-display text-3xl font-medium leading-[1.05] text-paper">
-            We design to your needs and wants.
-          </h1>
-          <p className="mt-5 max-w-xl text-base leading-relaxed text-cream/80 sm:text-lg">
-            We supply and construct on your site. {site.tagline}
-          </p>
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
-            <Button asChild size="lg" variant="invert">
-              <Link to="/quote">
-                Get a quote
-                <ArrowRight className="size-4" />
-              </Link>
-            </Button>
-            <Button asChild size="lg" variant="outline" className="border-cream/30 text-cream hover:bg-cream/10">
-              <a href={site.phoneHref}>
-                <Phone className="size-4" />
-                {site.phone}
-              </a>
-            </Button>
+        <div className="bg-ink">
+          <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16">
+            <p className="text-xs font-medium uppercase tracking-[0.28em] text-clay">Middle Tennessee</p>
+            <h1 className="mt-3 max-w-3xl font-display text-3xl font-medium leading-[1.05] text-paper">
+              We design to your needs and wants.
+            </h1>
+            <p className="mt-5 max-w-xl text-base leading-relaxed text-cream/80 sm:text-lg">
+              We supply and construct on your site. {site.tagline}
+            </p>
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+              <Button asChild size="lg" variant="invert">
+                <Link to="/quote">
+                  Get a quote
+                  <ArrowRight className="size-4" />
+                </Link>
+              </Button>
+              <Button asChild size="lg" variant="outline" className="border-cream/30 text-cream hover:bg-cream/10">
+                <a href={site.phoneHref}>
+                  <Phone className="size-4" />
+                  {site.phone}
+                </a>
+              </Button>
+            </div>
           </div>
         </div>
       </section>

@@ -9,7 +9,7 @@ import { cn } from "@/lib/utils";
 
 export function SiteHeader() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
-  const darkHero = pathname === "/";
+  const darkHero = false;
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
