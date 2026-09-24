@@ -10,11 +10,11 @@ Use only these two for that hero video. They are two angles of one building.
 | --- | --- | --- |
 | 01-front-balcony-shop-doors.jpg | Front. Tan walls, red roof, brown wainscot, timber balcony, shop overheads, concrete apron. | Ground-to-crane. Start low on the apron and rise until the roof and balcony are in frame. |
 | 02-side-balcony-long-leanto.jpg | Side. Timber balcony, two overheads, long lean-to on posts. | Pan right while the camera moves right, and drift slightly closer. |
+| 03-porch-side-both-ends.jpg | Other long side. Porch on both ends, walk door, two overheads. | Pan left while the camera moves left. |
 | barndo-tan-red-roof-gable-three-overheads.jpg | Gable end. Three overheads. Lean-to on each side. | Pan right while the camera moves right, and drift slightly closer. Keep the whole gable in frame. |
 
 These four angles of that same building are not in this folder. Do not invent them:
 
-- The other long side, porch on both ends
 - Interior, loft stairs on the left, open overheads ahead
 - Interior, loft and stairs on the right
 
