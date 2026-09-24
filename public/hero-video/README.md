@@ -14,11 +14,11 @@ Use only these two for that hero video. They are two angles of one building.
 | 04-corner-porch-three-overheads.jpg | Corner. Side porch, walk door, three overheads on the gable, materials in the yard. | Move closer. Keep the whole corner, both the porch and the three doors, in frame. |
 | 05-gable-three-overheads-both-leantos.jpg | Gable end. Three overheads. Lean-to on each side. Gravel apron. | Ground-to-crane. Start at the gravel and rise to the roof peak. Keep both lean-tos in frame. |
 | 06-interior-loft-stairs-right.jpg | Interior. Wood trusses, loft framing, stairs on the right, concrete floor. | Pan right across the loft and the stairs. Stay inside the room. |
+| 07-interior-open-overheads-stairs-left.jpg | Interior looking out. Stairs on the left, three open overheads, block steps in front. | Move closer, straight toward the open overheads. No orbit. |
 | barndo-tan-red-roof-gable-three-overheads.jpg | Gable end. Three overheads. Lean-to on each side. | Pan right while the camera moves right, and drift slightly closer. Keep the whole gable in frame. |
 
 These four angles of that same building are not in this folder. Do not invent them:
 
-- Interior, loft stairs on the left, open overheads ahead
 
 ## Other jobs — not that hero building
 
