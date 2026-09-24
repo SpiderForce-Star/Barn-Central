@@ -8,7 +8,7 @@ Use only these two for that hero video. They are two angles of one building.
 
 | File | What it is | Camera, 4 seconds, then fade to black |
 | --- | --- | --- |
-| barndo-tan-red-roof-balcony-front.jpg | Front. Timber balcony, shop doors, red roof, concrete apron. | Ground-to-crane. Start low on the apron and rise until the roof and balcony are in frame. |
+| 01-front-balcony-shop-doors.jpg | Front. Tan walls, red roof, brown wainscot, timber balcony, shop overheads, concrete apron. | Ground-to-crane. Start low on the apron and rise until the roof and balcony are in frame. |
 | barndo-tan-red-roof-gable-three-overheads.jpg | Gable end. Three overheads. Lean-to on each side. | Pan right while the camera moves right, and drift slightly closer. Keep the whole gable in frame. |
 
 These four angles of that same building are not in this folder. Do not invent them:
