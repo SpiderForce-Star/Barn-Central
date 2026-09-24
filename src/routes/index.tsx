@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Phone } from "lucide-react";
 import { ProjectGrid } from "@/components/project-grid";
@@ -7,20 +8,85 @@ import { processSteps, services, site } from "@/lib/site";
 
 export const Route = createFileRoute("/")({ component: Home });
 
+const heroStill = "/hero-video/01-front-balcony-shop-doors.jpg";
+
+function HomeHero() {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [reduceMotion, setReduceMotion] = useState(false);
+
+  useEffect(() => {
+    const media = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const sync = () => setReduceMotion(media.matches);
+    sync();
+    media.addEventListener("change", sync);
+    return () => media.removeEventListener("change", sync);
+  }, []);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video || reduceMotion) return;
+    let cancel = false;
+    const start = () => {
+      if (!cancel) void video.play().catch(() => {});
+    };
+    const logo = document.querySelector("header a[aria-label='Barn Central home'] img");
+    const running =
+      logo && "getAnimations" in logo
+        ? logo.getAnimations().filter((animation) => animation.playState !== "finished")
+        : [];
+    if (running.length > 0) {
+      const timer = window.setTimeout(start, 8000);
+      void Promise.all(running.map((animation) => animation.finished.catch(() => undefined))).then(() => {
+        window.clearTimeout(timer);
+        start();
+      });
+      return () => {
+        cancel = true;
+        window.clearTimeout(timer);
+      };
+    }
+    start();
+    return () => {
+      cancel = true;
+    };
+  }, [reduceMotion]);
+
+  const frame =
+    "mx-auto block h-auto w-full max-h-[72vh] max-w-[1920px] bg-black object-contain";
+
+  if (reduceMotion) {
+    return (
+      <img
+        src={heroStill}
+        width={1201}
+        height={905}
+        alt="Barn Central shop and living building with a timber balcony, red roof, and overhead doors"
+        className={frame}
+      />
+    );
+  }
+
+  return (
+    <video
+      ref={videoRef}
+      src="/hero-video/hero.mp4"
+      width={1920}
+      height={1080}
+      muted
+      playsInline
+      loop
+      preload="auto"
+      aria-label="Barn Central shop and living building"
+      className={frame}
+    />
+  );
+}
+
 function Home() {
   return (
     <main>
       <section className="pt-16 sm:pt-[4.25rem]">
-        <img
-          src="/buildings/hero-full-structure.jpg"
-          srcSet="/buildings/hero-800.jpg 800w, /buildings/hero-full-structure.jpg 1687w"
-          sizes="(min-width: 1687px) 1687px, 100vw"
-          width={1687}
-          height={567}
-          alt="Barn Central shop and living building with three overheads, covered porch, and balcony"
-          className="mx-auto block h-auto w-full max-w-[1687px]"
-          fetchPriority="high"
-        />
+        <HomeHero />
         <div className="bg-ink">
           <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16">
             <p className="text-xs font-medium uppercase tracking-[0.28em] text-clay">Middle Tennessee</p>
