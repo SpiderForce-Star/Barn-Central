@@ -15,6 +15,7 @@ Use only these two for that hero video. They are two angles of one building.
 | 05-gable-three-overheads-both-leantos.jpg | Gable end. Three overheads. Lean-to on each side. Gravel apron. | Ground-to-crane. Start at the gravel and rise to the roof peak. Keep both lean-tos in frame. |
 | 06-interior-loft-stairs-right.jpg | Interior. Wood trusses, loft framing, stairs on the right, concrete floor. | Pan right across the loft and the stairs. Stay inside the room. |
 | 07-interior-open-overheads-stairs-left.jpg | Interior looking out. Stairs on the left, three open overheads, block steps in front. | Move closer, straight toward the open overheads. No orbit. |
+| 08-interior-trusses-loft-stairs-left.jpg | Interior. Full wood truss ceiling, loft and stairs on the left, three open overheads. | Move closer toward the trusses and the open overheads. No orbit. |
 | barndo-tan-red-roof-gable-three-overheads.jpg | Gable end. Three overheads. Lean-to on each side. | Pan right while the camera moves right, and drift slightly closer. Keep the whole gable in frame. |
 
 These four angles of that same building are not in this folder. Do not invent them:
