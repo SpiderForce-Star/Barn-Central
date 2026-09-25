@@ -102,12 +102,11 @@ export function ProjectGrid({
               onClick={() => open(p)}
               className="group w-full overflow-hidden rounded-lg bg-cream text-left shadow-[var(--shadow-border)] transition-[box-shadow,transform] duration-200 hover:shadow-[var(--shadow-border-hover)]"
             >
-              <span className="block aspect-[4/3] overflow-hidden">
+              <span className="block overflow-hidden bg-paper">
                 <img
                   src={p.image}
                   alt={p.title}
-                  className="size-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-                  style={{ objectPosition: p.objectPosition ?? "50% 50%" }}
+                  className="mx-auto block h-auto max-h-72 w-full object-contain"
                 />
               </span>
               <span className="block p-4">
@@ -163,7 +162,7 @@ export function ProjectGrid({
               <img
                 src={current}
                 alt={active.title}
-                className="max-h-[56vh] w-full rounded-t-xl object-cover object-center"
+                className="mx-auto block h-auto max-h-[70vh] w-full rounded-t-xl bg-paper object-contain"
               />
               {slides.length > 1 ? (
                 <div className="flex gap-2 overflow-x-auto px-4 pt-3">
@@ -178,7 +177,7 @@ export function ProjectGrid({
                       )}
                       aria-label={`Photo ${i + 1} of ${slides.length}`}
                     >
-                      <img src={src} alt="" className="size-full object-cover" />
+                      <img src={src} alt="" className="size-full bg-paper object-contain" />
                     </button>
                   ))}
                 </div>

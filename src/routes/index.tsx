@@ -135,8 +135,8 @@ function Home() {
             <div className="overflow-hidden rounded-xl bg-cream">
               <img
                 src={featuredProject.image}
-                alt="Tan shop-and-living barndo with three overheads and a covered balcony — Barn Central"
-                className="aspect-[16/9] w-full object-cover object-[46%_58%] max-sm:aspect-[4/3] max-sm:object-[46%_62%]"
+                alt={featuredProject.title}
+                className="mx-auto block h-auto max-h-[70vh] w-full bg-black object-contain"
               />
             </div>
           </div>
@@ -158,7 +158,7 @@ function Home() {
             ) : null}
             <div className="mt-6">
               <Button asChild>
-                <Link to="/projects" search={{ cat: "barndo", job: "tan-balcony" }}>
+                <Link to="/projects" search={{ cat: featuredProject.category, job: featuredProject.id }}>
                   See the work
                   <ArrowRight className="size-4" />
                 </Link>
