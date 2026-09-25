@@ -107,6 +107,13 @@ export function BuildingPreview({
       : `${width}×${length}×${height} · ${framingLabel} · ${porch === "two" ? "two" : "one"} ${porchDepth}' ${porch === "two" ? "porches" : "porch"}`;
 
   const doorCount = walkDoors === "0" ? 0 : walkDoors === "1" ? 1 : walkDoors === "2" ? 2 : 3;
+  const openingW = Math.min(bodyW * 0.32, Math.max(52, bodyW * 0.32));
+  const openingCenter = framing === "single-slope" ? bodyX + bodyW / 2 : peakX;
+  const openingX = Math.max(
+    bodyX + 8,
+    Math.min(openingCenter - openingW / 2, bodyX + bodyW - openingW - 8),
+  );
+  const openingTop = eaveY + wallH * 0.34;
 
   return (
     <div className="relative overflow-hidden rounded-lg bg-cream">
@@ -245,25 +252,15 @@ export function BuildingPreview({
           </g>
         ) : null}
 
-        {!leanTo ? (
-          <rect
-            x={bodyX + bodyW * 0.22}
-            y={eaveY + wallH * 0.32}
-            width={bodyW * 0.38}
-            height={wallH * 0.68}
-            fill="#1a120c"
-            opacity="0.55"
-          />
-        ) : null}
-        {!leanTo ? (
-          <rect
-            x={bodyX + bodyW * 0.22}
-            y={eaveY + wallH * 0.32}
-            width={bodyW * 0.38}
-            height="5"
-            fill={trim}
-          />
-        ) : null}
+        <rect
+          x={openingX}
+          y={openingTop}
+          width={openingW}
+          height={groundY - openingTop}
+          fill="#1a120c"
+          opacity="0.55"
+        />
+        <rect x={openingX} y={openingTop} width={openingW} height="5" fill={trim} />
 
         {windows !== "none"
           ? Array.from({ length: windows === "living" ? 4 : 2 }).map((_, i) => {
@@ -297,20 +294,26 @@ export function BuildingPreview({
 
         {doorCount > 0
           ? Array.from({ length: doorCount }).map((_, i) => {
-              const w = Math.min(18, bodyW * 0.08);
-              const x = bodyX + bodyW * 0.04 + i * (w + 6);
+              const w = Math.min(16, bodyW * 0.065);
+              const gap = 7;
+              const roomRight = bodyX + bodyW - (openingX + openingW) - 6;
+              const side = roomRight >= w ? "right" : "left";
+              const x =
+                side === "right"
+                  ? openingX + openingW + gap + i * (w + gap)
+                  : openingX - gap - w - i * (w + gap);
               return (
                 <g key={`wd-${i}`}>
                   <rect
                     x={x}
-                    y={groundY - wallH * 0.52}
+                    y={groundY - wallH * 0.48}
                     width={w}
-                    height={wallH * 0.52}
+                    height={wallH * 0.48}
                     fill="#2a1f16"
                     stroke={trim}
                     strokeWidth="1.2"
                   />
-                  <circle cx={x + w * 0.78} cy={groundY - wallH * 0.26} r="1.6" fill="#c4a574" />
+                  <circle cx={x + w * 0.78} cy={groundY - wallH * 0.24} r="1.5" fill="#c4a574" />
                 </g>
               );
             })
@@ -565,6 +568,7 @@ export function FramingElevation({
         trimColorId="charcoal"
         framing={framing}
         foundation="post-gravel"
+        walkDoors="1"
       />
     </div>
   );
