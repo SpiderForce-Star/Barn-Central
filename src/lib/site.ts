@@ -58,7 +58,7 @@ export const buildingTypes = [
   { id: "barndo", label: "Barndo / Home" },
 ] as const;
 
-export type FramingId = "gabled" | "gabled-unsym" | "single-slope" | "lean-to";
+export type FramingId = "gabled" | "gabled-unsym" | "single-slope" | "lean-to" | "lean-to-both";
 export type FoundationId = "post-dirt" | "post-gravel" | "slab" | "split";
 export type WalkDoorId = "0" | "1" | "2" | "3plus";
 export type WindowId = "none" | "few" | "living";
@@ -69,22 +69,37 @@ export const framingTypes = [
   {
     id: "gabled" as const,
     label: "Gabled",
-    note: "Equal roof slopes. Peak on center. The standard barn and shop.",
+    note: "Equal roof slopes. Peak on center. The standard barn and shop. Bright red vertical rib.",
+    wallColorId: "bright-red",
+    roofColorId: "charcoal",
   },
   {
     id: "gabled-unsym" as const,
     label: "Gabled unsymmetrical",
-    note: "Peak offset. One long slope, one short. More height on one eave.",
+    note: "Peak offset. One long slope, one short. More height on one eave. Tan vertical rib, red roof.",
+    wallColorId: "tan",
+    roofColorId: "bright-red",
   },
   {
     id: "single-slope" as const,
     label: "Single slope",
-    note: "One roof plane, high wall to low wall.",
+    note: "One roof plane, high wall to low wall. Marine vertical rib.",
+    wallColorId: "marine",
+    roofColorId: "galvalume",
   },
   {
     id: "lean-to" as const,
-    label: "Lean-to",
-    note: "A lean-to off a gabled main building — porch, extra stall, or covered equipment on the eave.",
+    label: "Lean-to, one side",
+    note: "Open lean-to. Gabled main building, then a step down to a single-slope roof on one eave. Brown vertical rib on the main bay.",
+    wallColorId: "brown",
+    roofColorId: "charcoal",
+  },
+  {
+    id: "lean-to-both" as const,
+    label: "Lean-to, both sides",
+    note: "Open lean-tos on both eaves. Gabled center, step down to a single-slope roof each side. Evergreen vertical rib on the main bay.",
+    wallColorId: "evergreen",
+    roofColorId: "galvalume",
   },
 ] as const;
 

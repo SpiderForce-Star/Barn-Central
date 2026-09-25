@@ -1,5 +1,7 @@
+import { useId } from "react";
 import {
   colorById,
+  framingTypes,
   type CupolaId,
   type FoundationId,
   type FramingId,
@@ -47,13 +49,19 @@ export function BuildingPreview({
   const wall = colorById(wallColorId).hex;
   const roof = colorById(roofColorId).hex;
   const trim = colorById(trimColorId).hex;
+  const clipId = useId().replace(/:/g, "");
 
-  const leftPorch = framing !== "lean-to" && porch === "two";
-  const rightPorch = framing !== "lean-to" && (porch === "one" || porch === "two");
-  const leanTo = framing === "lean-to";
+  const leanTo = framing === "lean-to" || framing === "lean-to-both";
+  const leftLean = framing === "lean-to-both";
+  const rightLean = leanTo;
+  const leftPorch = !leanTo && porch === "two";
+  const rightPorch = !leanTo && (porch === "one" || porch === "two");
   const porchEach = porch === "none" || leanTo ? 0 : porchDepth;
-  const leanDepth = leanTo ? Math.max(porchDepth, 10) : 0;
-  const span = width + porchEach * (leftPorch && rightPorch ? 2 : leftPorch || rightPorch ? 1 : 0) + leanDepth;
+  const leanDepth = leanTo ? Math.max(porchDepth, 12) : 0;
+  const span =
+    width +
+    porchEach * ((leftPorch ? 1 : 0) + (rightPorch ? 1 : 0)) +
+    leanDepth * ((leftLean ? 1 : 0) + (rightLean ? 1 : 0));
 
   const VB_W = 640;
   const VB_H = 340;
@@ -68,15 +76,18 @@ export function BuildingPreview({
   const leanW = leanDepth * px;
   const bodyW = width * px;
   const startX =
-    padX + (maxDrawW - (bodyW + (leftPorch ? porchW : 0) + (rightPorch ? porchW : 0) + leanW)) / 2;
-  const bodyX = startX + (leftPorch ? porchW : 0);
+    padX +
+    (maxDrawW -
+      (bodyW + (leftPorch ? porchW : 0) + (rightPorch ? porchW : 0) + (leftLean ? leanW : 0) + (rightLean ? leanW : 0))) /
+      2;
+  const bodyX = startX + (leftPorch ? porchW : 0) + (leftLean ? leanW : 0);
   const eaveY = groundY - wallH;
   const peakX = framing === "gabled-unsym" ? bodyX + bodyW * 0.32 : bodyX + bodyW / 2;
   const peakY = eaveY - roofH;
   const highY = framing === "single-slope" ? eaveY - roofH : eaveY;
   const porchEave = wallH * 0.62;
   const porchY = groundY - porchEave;
-  const leanEave = wallH * 0.58;
+  const leanEave = wallH * 0.55;
   const leanY = groundY - leanEave;
 
   const framingLabel =
@@ -86,7 +97,9 @@ export function BuildingPreview({
         ? "gabled unsymmetrical"
         : framing === "single-slope"
           ? "single slope"
-          : "gabled + lean-to";
+          : framing === "lean-to-both"
+            ? "gabled + lean-to both sides"
+            : "gabled + lean-to one side";
 
   const caption =
     porch === "none" || leanTo
@@ -129,17 +142,43 @@ export function BuildingPreview({
           />
         ) : null}
 
-        {leanTo ? (
+        {leftLean ? (
+          <LeanTo
+            x={bodyX - leanW}
+            w={leanW}
+            eaveY={eaveY}
+            leanY={leanY}
+            groundY={groundY}
+            roof={roof}
+            side="left"
+          />
+        ) : null}
+
+        {rightLean ? (
           <LeanTo
             x={bodyX + bodyW}
             w={leanW}
             eaveY={eaveY}
             leanY={leanY}
             groundY={groundY}
-            wall={wall}
             roof={roof}
+            side="right"
           />
         ) : null}
+
+        <defs>
+          <clipPath id={`${clipId}-wall`}>
+            {framing === "single-slope" ? (
+              <polygon
+                points={`${bodyX},${highY} ${bodyX + bodyW},${eaveY} ${bodyX + bodyW},${groundY} ${bodyX},${groundY}`}
+              />
+            ) : (
+              <polygon
+                points={`${bodyX},${groundY} ${bodyX},${eaveY} ${peakX},${peakY} ${bodyX + bodyW},${eaveY} ${bodyX + bodyW},${groundY}`}
+              />
+            )}
+          </clipPath>
+        </defs>
 
         {framing === "single-slope" ? (
           <>
@@ -156,9 +195,8 @@ export function BuildingPreview({
           </>
         ) : (
           <>
-            <rect x={bodyX} y={eaveY} width={bodyW} height={wallH} fill={wall} stroke="#1a120c" strokeWidth="1.4" />
             <polygon
-              points={`${bodyX},${eaveY} ${peakX},${peakY} ${bodyX + bodyW},${eaveY}`}
+              points={`${bodyX},${groundY} ${bodyX},${eaveY} ${peakX},${peakY} ${bodyX + bodyW},${eaveY} ${bodyX + bodyW},${groundY}`}
               fill={wall}
               stroke="#1a120c"
               strokeWidth="1.4"
@@ -169,6 +207,24 @@ export function BuildingPreview({
             />
           </>
         )}
+
+        <g clipPath={`url(#${clipId}-wall)`}>
+          {Array.from({ length: Math.floor(bodyW / 8) }, (_, i) => {
+            const x = bodyX + 6 + i * 8;
+            return (
+              <line
+                key={x}
+                x1={x}
+                y1={peakY}
+                x2={x}
+                y2={groundY}
+                stroke="#1a120c"
+                strokeWidth="1.1"
+                opacity="0.22"
+              />
+            );
+          })}
+        </g>
 
         {ridgeVent ? (
           <line
@@ -189,21 +245,25 @@ export function BuildingPreview({
           </g>
         ) : null}
 
-        <rect
-          x={bodyX + bodyW * 0.22}
-          y={eaveY + wallH * 0.32}
-          width={bodyW * 0.38}
-          height={wallH * 0.68}
-          fill="#1a120c"
-          opacity="0.55"
-        />
-        <rect
-          x={bodyX + bodyW * 0.22}
-          y={eaveY + wallH * 0.32}
-          width={bodyW * 0.38}
-          height="5"
-          fill={trim}
-        />
+        {!leanTo ? (
+          <rect
+            x={bodyX + bodyW * 0.22}
+            y={eaveY + wallH * 0.32}
+            width={bodyW * 0.38}
+            height={wallH * 0.68}
+            fill="#1a120c"
+            opacity="0.55"
+          />
+        ) : null}
+        {!leanTo ? (
+          <rect
+            x={bodyX + bodyW * 0.22}
+            y={eaveY + wallH * 0.32}
+            width={bodyW * 0.38}
+            height="5"
+            fill={trim}
+          />
+        ) : null}
 
         {windows !== "none"
           ? Array.from({ length: windows === "living" ? 4 : 2 }).map((_, i) => {
@@ -261,7 +321,8 @@ export function BuildingPreview({
           bodyX={bodyX}
           bodyW={bodyW}
           groundY={groundY}
-          leanTo={leanTo}
+          leftLean={leftLean}
+          rightLean={rightLean}
           leanW={leanW}
         />
       </svg>
@@ -355,19 +416,22 @@ function PostsBelow({
   bodyX,
   bodyW,
   groundY,
-  leanTo,
+  leftLean,
+  rightLean,
   leanW,
 }: {
   foundation: FoundationId;
   bodyX: number;
   bodyW: number;
   groundY: number;
-  leanTo: boolean;
+  leftLean: boolean;
+  rightLean: boolean;
   leanW: number;
 }) {
   if (foundation !== "post-dirt" && foundation !== "post-gravel") return null;
   const xs = [0.12, 0.38, 0.62, 0.88].map((t) => bodyX + bodyW * t);
-  if (leanTo) xs.push(bodyX + bodyW + leanW * 0.45, bodyX + bodyW + leanW * 0.82);
+  if (leftLean) xs.push(bodyX - leanW * 0.55, bodyX - leanW * 0.18);
+  if (rightLean) xs.push(bodyX + bodyW + leanW * 0.45, bodyX + bodyW + leanW * 0.82);
   const embed = foundation === "post-gravel" ? 28 : 34;
   return (
     <g>
@@ -438,37 +502,43 @@ function LeanTo({
   eaveY,
   leanY,
   groundY,
-  wall,
   roof,
+  side,
 }: {
   x: number;
   w: number;
   eaveY: number;
   leanY: number;
   groundY: number;
-  wall: string;
   roof: string;
+  side: "left" | "right";
 }) {
+  const step = 16;
+  const innerX = side === "right" ? x : x + w;
+  const outerX = side === "right" ? x + w : x;
+  const innerY = eaveY + step;
+  const outerY = leanY;
+  const roofPts =
+    side === "right"
+      ? `${innerX},${innerY} ${outerX},${outerY} ${outerX - 4},${outerY - 8} ${innerX},${innerY - 8}`
+      : `${outerX},${outerY} ${innerX},${innerY} ${innerX},${innerY - 8} ${outerX + 4},${outerY - 8}`;
+  const stepPts =
+    side === "right"
+      ? `${innerX},${eaveY + 4} ${innerX + 7},${eaveY + 4} ${innerX + 7},${innerY} ${innerX},${innerY}`
+      : `${innerX - 7},${eaveY + 4} ${innerX},${eaveY + 4} ${innerX},${innerY} ${innerX - 7},${innerY}`;
+
   return (
     <g>
-      <polygon
-        points={`${x},${eaveY + 6} ${x + w},${leanY} ${x + w},${groundY} ${x},${groundY}`}
-        fill={wall}
-        stroke="#1a120c"
-        strokeWidth="1.2"
-        opacity="0.94"
-      />
-      <polygon points={`${x},${eaveY + 6} ${x + w},${leanY} ${x + w - 10},${leanY - 6} ${x - 8},${eaveY}`} fill={roof} />
-      {[0.2, 0.55, 0.88].map((t) => (
-        <rect
-          key={t}
-          x={x + w * t - 3}
-          y={leanY + 10}
-          width="6"
-          height={groundY - leanY - 10}
-          fill="#6b4a2f"
-        />
-      ))}
+      <polygon points={stepPts} fill={roof} stroke="#1a120c" strokeWidth="1" />
+      <polygon points={roofPts} fill={roof} stroke="#1a120c" strokeWidth="1.1" />
+      {[0.06, 0.34, 0.62, 0.9].map((t) => {
+        const postX = x + w * t;
+        const roofAt =
+          side === "right" ? innerY + (outerY - innerY) * t : outerY + (innerY - outerY) * t;
+        return (
+          <rect key={t} x={postX - 3.5} y={roofAt} width="7" height={groundY - roofAt} fill="#6b4a2f" />
+        );
+      })}
     </g>
   );
 }
@@ -481,6 +551,7 @@ export function FramingElevation({
   framing: FramingId;
   className?: string;
 }) {
+  const look = framingTypes.find((f) => f.id === framing) ?? framingTypes[0];
   return (
     <div className={className}>
       <BuildingPreview
@@ -489,8 +560,8 @@ export function FramingElevation({
         height={14}
         porch="none"
         porchDepth={12}
-        wallColorId="white"
-        roofColorId="charcoal"
+        wallColorId={look.wallColorId}
+        roofColorId={look.roofColorId}
         trimColorId="charcoal"
         framing={framing}
         foundation="post-gravel"
